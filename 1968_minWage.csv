@@ -1,0 +1,56 @@
+state,minimumWage
+Alabama,0
+Alaska,15.12
+Arizona,4.75
+Arkansas,1.12
+California,11.88
+Colorado,9
+Connecticut,10.08
+Delaware,9
+District of Columbia,10.08
+Federal (FLSA),11.52
+Florida,0
+Georgia,0
+Guam,9
+Hawaii,9
+Idaho,8.28
+Illinois,0
+Indiana,8.28
+Iowa,0
+Kansas,0
+Kentucky,5.4
+Louisiana,0
+Maine,10.08
+Maryland,8.28
+Massachusetts,11.52
+Michigan,9
+Minnesota,8.28
+Mississippi,0
+Missouri,0
+Montana,0
+Nebraska,7.2
+Nevada,9
+New Hampshire,10.08
+New Jersey,10.08
+New Mexico,10.08
+New York,11.52
+North Carolina,7.2
+North Dakota,9
+Ohio,9
+Oklahoma,7.2
+Oregon,9
+Pennsylvania,8.28
+Puerto Rico,11.52
+Rhode Island,10.08
+South Carolina,0
+South Dakota,3.6
+Tennessee,0
+Texas,0
+U.S. Virgin Islands,NA
+Utah,8.28
+Vermont,10.08
+Virginia,0
+Washington,11.52
+West Virginia,7.2
+Wisconsin,9
+Wyoming,8.64
