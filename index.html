@@ -4,7 +4,25 @@
 				<h1>Minimum Wages of the United States 2000-2017</h1>
 				</header>
 <head>
-	
+    <style>
+
+        .rectangle {
+          fill: steelblue;
+        }
+        .rectangle:hover {
+          fill: orange;
+        }
+        .axis {
+          font: 10px sans-serif;
+        }
+        
+        .axis path,
+        .axis line {
+          fill: none;
+          stroke: #000;
+          shape-rendering: crispEdges;
+        }
+        </style>
 <meta charset="utf-8">
 <meta
   name="viewport"
@@ -1765,4 +1783,104 @@ if (year == 2004)
         </div>
       </div>
   </body>
+
+  <body>
+      <div id="drop" align=center></div>
+      <script src="http://d3js.org/d3.v4.min.js"></script>
+      
+      
+      <form>
+          <label for="year">Please select a year: </label>
+          <input type="range" min=2000 max=2017 step=1 id="year" value=2017 oninput="selected_year.value = year.value" onchange ="drawBar(year.value)">
+          <output name="selected_year" id="selected_year">2017</output>
+      </form>
+      
+      <script>
+      
+      // Centers the Graph
+      var margin = {top: 80, right: 180, bottom: 80, left: 180},
+          width = 960 - margin.left - margin.right,
+          height = 500 - margin.top - margin.bottom;
+      
+      
+      // Creates the graph
+      var svg = d3.select("body").append("svg")
+        .attr("width", width + margin.left + margin.right)
+          .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+      
+      var drawBar = function(year) {
+        // The dataset that we will use to populate the graph.
+        svg.selectAll("*").remove(); 
+        d3.csv("MinimumWageData.csv", function(error, data){
+      
+          // filter year
+          var data = data.filter(function(d){return d.Year == year;});
+          // Get every column value
+          var elements = Object.keys(data[0])
+            .filter(function(d){
+              return ((d != "Year") & (d != "State"));
+            });
+          var selection = elements[0];
+      
+          var y = d3.scaleLinear()
+              .domain([0, d3.max(data, function(d){
+                return +d[selection];
+              })])
+              .range([height, 0]);
+      
+          var x = d3.scaleBand()
+              .domain(data.map(function(d){ return d.State;}))
+              .rangeRound([0, width]);
+      
+      
+          var xAxis = d3.axisBottom(x);
+          var yAxis = d3.axisLeft(y);
+      
+      
+          svg.append("g")
+              .attr("class", "x axis")
+              .attr("transform", "translate(0," + height + ")")
+              .call(xAxis)
+              .selectAll("text")
+              .style("font-size", "8px")
+                .style("text-anchor", "end")
+                .attr("dx", "-.8em")
+                .attr("dy", "-.55em")
+                .attr("transform", "rotate(-90)" );
+      
+      
+        svg.append("g")
+        .attr("class", "y axis")
+        .call(yAxis);
+      
+        svg.selectAll("rectangle")
+          .data(data)
+          .enter()
+          .append("rect")
+          .attr("class","rectangle")
+          .attr("width", width/data.length)
+          .attr("height", function(d){
+            return height - y(+d[selection]);
+          })
+          .attr("x", function(d, i){
+            return (width / data.length) * i ;
+          })
+          .attr("y", function(d){
+            return y(+d[selection]);
+          })
+          .append("title")
+          .text(function(d){
+            return d.State + " : " + d[selection];
+          });
+      
+          
+      
+      
+      
+        });
+      }
+      </script>
+      </body>
 </html>
