@@ -1804,7 +1804,7 @@ if (year == 2004)
       
       
       // Creates the graph
-      var svg = d3.select("body").append("svg")
+      var svg2 = d3.select("body").append("svg")
         .attr("width", width + margin.left + margin.right)
           .attr("height", height + margin.top + margin.bottom)
         .append("g")
@@ -1812,7 +1812,7 @@ if (year == 2004)
       
       var drawBar = function(year) {
         // The dataset that we will use to populate the graph.
-        svg.selectAll("*").remove(); 
+        svg2.selectAll("*").remove(); 
         d3.csv("MinimumWageData.csv", function(error, data){
       
           // filter year
@@ -1839,7 +1839,7 @@ if (year == 2004)
           var yAxis = d3.axisLeft(y);
       
       
-          svg.append("g")
+          svg2.append("g")
               .attr("class", "x axis")
               .attr("transform", "translate(0," + height + ")")
               .call(xAxis)
@@ -1851,11 +1851,11 @@ if (year == 2004)
                 .attr("transform", "rotate(-90)" );
       
       
-        svg.append("g")
+        svg2.append("g")
         .attr("class", "y axis")
         .call(yAxis);
       
-        svg.selectAll("rectangle")
+        svg2.selectAll("rectangle")
           .data(data)
           .enter()
           .append("rect")
